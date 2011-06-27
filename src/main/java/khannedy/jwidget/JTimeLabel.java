@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+import khannedy.jwidget.event.TimeLabelEvent;
+import khannedy.jwidget.listener.TimeLabelListener;
 
 /**
  *
@@ -102,15 +104,50 @@ public class JTimeLabel extends JLabel implements ActionListener {
         firePropertyChange(PROP_TIME_FORMATTER, oldTimeFormatter, timeFormatter);
     }
 
+    private TimeLabelEvent event = new TimeLabelEvent(this);
+
     public void startTimer() {
         timer.start();
+        fireTimeLabelListenerOnStart(event);
     }
 
     public void stopTimer() {
         timer.stop();
+        fireTimeLabelListenerOnStop(event);
     }
 
     public void actionPerformed(ActionEvent e) {
         renderTime();
+        fireTimeLabelListenerOnTimeChange(event);
+    }
+
+    public long getTime() {
+        return now.getTime();
+    }
+
+    public void addTimeLabelListener(TimeLabelListener listener) {
+        listenerList.add(TimeLabelListener.class, listener);
+    }
+
+    public void removeTimeLabelListener(TimeLabelListener listener) {
+        listenerList.remove(TimeLabelListener.class, listener);
+    }
+
+    protected void fireTimeLabelListenerOnStart(TimeLabelEvent event) {
+        for (TimeLabelListener listener : listenerList.getListeners(TimeLabelListener.class)) {
+            listener.onStart(event);
+        }
+    }
+
+    protected void fireTimeLabelListenerOnStop(TimeLabelEvent event) {
+        for (TimeLabelListener listener : listenerList.getListeners(TimeLabelListener.class)) {
+            listener.onStop(event);
+        }
+    }
+
+    protected void fireTimeLabelListenerOnTimeChange(TimeLabelEvent event) {
+        for (TimeLabelListener listener : listenerList.getListeners(TimeLabelListener.class)) {
+            listener.onTimeChange(event);
+        }
     }
 }
