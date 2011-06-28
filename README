@@ -1,1 +1,4 @@
 JWidget is a Java Swing Widget
+
+List of widgets :
+- JTimeLabel, component for displaying datetime in real time
