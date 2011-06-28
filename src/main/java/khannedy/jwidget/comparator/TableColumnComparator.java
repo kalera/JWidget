@@ -29,6 +29,6 @@ public class TableColumnComparator implements Comparator<Field> {
     public int compare(Field o1, Field o2) {
         TableColumn column1 = o1.getAnnotation(TableColumn.class);
         TableColumn column2 = o2.getAnnotation(TableColumn.class);
-        return Integer.valueOf(column1.name()).compareTo(Integer.valueOf(column2.number()));
+        return Integer.valueOf(column1.number()).compareTo(Integer.valueOf(column2.number()));
     }
 }
