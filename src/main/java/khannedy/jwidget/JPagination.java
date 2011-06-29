@@ -170,4 +170,15 @@ public final class JPagination extends JPanel implements PaginationModelListener
             }
         }
     }
+
+    @Override
+    public void setOpaque(boolean isOpaque) {
+        buttonFirst.setOpaque(isOpaque);
+        buttonLast.setOpaque(isOpaque);
+        buttonNext.setOpaque(isOpaque);
+        buttonPrev.setOpaque(isOpaque);
+        comboPage.setOpaque(isOpaque);
+        super.setOpaque(isOpaque);
+    }
+    
 }
