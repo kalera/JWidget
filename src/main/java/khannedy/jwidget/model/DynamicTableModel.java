@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import khannedy.jwidget.annotation.TableColumn;
 import khannedy.jwidget.comparator.TableColumnComparator;
 import khannedy.jwidget.util.ArrayUtilities;
@@ -128,5 +130,13 @@ public class DynamicTableModel<T> extends AbstractTableModel {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(DynamicTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Class<? extends TableCellEditor> getTableCellEditor(int column) {
+        return fields.get(column).getAnnotation(TableColumn.class).editor();
+    }
+
+    public Class<? extends TableCellRenderer> getTableCellRenderer(int column) {
+        return fields.get(column).getAnnotation(TableColumn.class).renderer();
     }
 }
