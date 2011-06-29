@@ -25,6 +25,8 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import khannedy.jwidget.editor.NoTableCellEditor;
+import khannedy.jwidget.renderer.NoTableCellRenderer;
 
 /**
  *
@@ -43,7 +45,7 @@ public @interface TableColumn {
 
     String[] groups() default {};
 
-    Class<? extends TableCellRenderer> renderer() default DefaultTableCellRenderer.class;
+    Class<? extends TableCellRenderer> renderer() default NoTableCellRenderer.class;
 
-    Class<? extends TableCellEditor> editor() default DefaultCellEditor.class;
+    Class<? extends TableCellEditor> editor() default NoTableCellEditor.class;
 }
