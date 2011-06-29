@@ -77,6 +77,38 @@ public class DynamicTableModel<T> extends AbstractTableModel {
         Collections.sort(fields, new TableColumnComparator());
     }
 
+    public T set(int index, T element) {
+        try {
+            return data.set(index, element);
+        } finally {
+            fireTableRowsUpdated(index, index);
+        }
+    }
+
+    public T remove(int index) {
+        try {
+            return data.remove(index);
+        } finally {
+            fireTableRowsDeleted(index, index);
+        }
+    }
+
+    public boolean isEmpty() {
+        return data.isEmpty();
+    }
+
+    public T get(int index) {
+        return data.get(index);
+    }
+
+    public boolean add(T e) {
+        try {
+            return data.add(e);
+        } finally {
+            fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
+        }
+    }
+
     public String getGroup() {
         return group;
     }
