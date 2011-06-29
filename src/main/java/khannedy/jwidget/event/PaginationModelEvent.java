@@ -25,11 +25,11 @@ import khannedy.jwidget.model.PaginationModel;
  */
 public class PaginationModelEvent extends EventObject {
 
-    private PaginationModel paginationModel;
+    private PaginationAction actionType;
 
-    public PaginationModelEvent(PaginationModel source) {
+    public PaginationModelEvent(PaginationModel source, PaginationAction actionType) {
         super(source);
-        paginationModel = source;
+        this.actionType = actionType;
     }
 
     @Override
@@ -37,15 +37,19 @@ public class PaginationModelEvent extends EventObject {
         return (PaginationModel) super.getSource();
     }
 
+    public PaginationAction getActionType() {
+        return actionType;
+    }
+
     public int getTotalPage() {
-        return paginationModel.getTotalPage();
+        return getSource().getTotalPage();
     }
 
     public int getPageSize() {
-        return paginationModel.getPageSize();
+        return getSource().getPageSize();
     }
 
     public int getCurrentPage() {
-        return paginationModel.getCurrentPage();
+        return getSource().getCurrentPage();
     }
 }

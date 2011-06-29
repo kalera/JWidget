@@ -133,10 +133,8 @@ public final class JPagination extends JPanel implements PaginationModelListener
 
     public void onPageChange(PaginationModelEvent event) {
         renderComponent();
-
         comboPage.setSelectedItem(event.getCurrentPage());
-
-        fireOnPageChange(new PaginationEvent(this));
+        fireOnPageChange(new PaginationEvent(this, event.getActionType()));
     }
 
     public void addPaginationListener(PaginationListener listener) {

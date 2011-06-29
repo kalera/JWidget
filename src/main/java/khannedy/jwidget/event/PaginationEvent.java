@@ -25,13 +25,20 @@ import khannedy.jwidget.JPagination;
  */
 public class PaginationEvent extends EventObject {
 
-    public PaginationEvent(JPagination source) {
+    private PaginationAction actionType;
+
+    public PaginationEvent(JPagination source, PaginationAction actionType) {
         super(source);
+        this.actionType = actionType;
     }
 
     @Override
     public JPagination getSource() {
         return (JPagination) super.getSource();
+    }
+
+    public PaginationAction getActionType() {
+        return actionType;
     }
 
     public int getCurrentPage() {

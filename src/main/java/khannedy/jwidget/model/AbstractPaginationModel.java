@@ -17,6 +17,7 @@
 package khannedy.jwidget.model;
 
 import javax.swing.event.EventListenerList;
+import khannedy.jwidget.event.PaginationAction;
 import khannedy.jwidget.event.PaginationModelEvent;
 import khannedy.jwidget.listener.PaginationModelListener;
 
@@ -27,8 +28,6 @@ import khannedy.jwidget.listener.PaginationModelListener;
 public abstract class AbstractPaginationModel implements PaginationModel {
 
     protected EventListenerList listenerList = new EventListenerList();
-
-    private PaginationModelEvent event = new PaginationModelEvent(this);
 
     private int currentPage = 1;
 
@@ -58,27 +57,35 @@ public abstract class AbstractPaginationModel implements PaginationModel {
 
     public void nextPage() {
         if (isHasNextPage()) {
-            goToPage(getCurrentPage() + 1);
+            changePage(getCurrentPage() + 1);
+            firePaginationModelListenerOnPageChange(new PaginationModelEvent(this, PaginationAction.ACTION_NEXT_PAGE));
         }
     }
 
     public void prevPage() {
         if (isHasPrevPage()) {
-            goToPage(getCurrentPage() - 1);
+            changePage(getCurrentPage() - 1);
+            firePaginationModelListenerOnPageChange(new PaginationModelEvent(this, PaginationAction.ACTION_PREV_PAGE));
         }
     }
 
     public void firstPage() {
-        goToPage(1);
+        changePage(1);
+        firePaginationModelListenerOnPageChange(new PaginationModelEvent(this, PaginationAction.ACTION_FIRST_PAGE));
     }
 
     public void lastPage() {
-        goToPage(getTotalPage());
+        changePage(getTotalPage());
+        firePaginationModelListenerOnPageChange(new PaginationModelEvent(this, PaginationAction.ACTION_LAST_PAGE));
     }
 
     public void goToPage(int page) {
+        changePage(page);
+        firePaginationModelListenerOnPageChange(new PaginationModelEvent(this, PaginationAction.ACTION_GOTO_PAGE));
+    }
+
+    private void changePage(int page) {
         currentPage = page;
-        firePaginationModelListenerOnPageChange(event);
     }
 
     public void addPaginationModelListener(PaginationModelListener listener) {
