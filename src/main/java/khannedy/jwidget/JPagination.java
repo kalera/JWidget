@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -180,5 +181,36 @@ public final class JPagination extends JPanel implements PaginationModelListener
         comboPage.setOpaque(isOpaque);
         super.setOpaque(isOpaque);
     }
-    
+
+    public void setIconFirst(Icon defaultIcon) {
+        buttonFirst.setIcon(defaultIcon);
+    }
+
+    public void setIconLast(Icon defaultIcon) {
+        buttonLast.setIcon(defaultIcon);
+    }
+
+    public void setIconNext(Icon defaultIcon) {
+        buttonNext.setIcon(defaultIcon);
+    }
+
+    public void setIconPrev(Icon defaultIcon) {
+        buttonPrev.setIcon(defaultIcon);
+    }
+
+    public Icon getIconFirst() {
+        return buttonFirst.getIcon();
+    }
+
+    public Icon getIconLast() {
+        return buttonLast.getIcon();
+    }
+
+    public Icon getIconNext() {
+        return buttonNext.getIcon();
+    }
+
+    public Icon getIconPrev() {
+        return buttonPrev.getIcon();
+    }
 }
