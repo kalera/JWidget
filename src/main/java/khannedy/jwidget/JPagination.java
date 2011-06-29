@@ -31,6 +31,7 @@ import khannedy.jwidget.event.PaginationModelEvent;
 import khannedy.jwidget.listener.PaginationListener;
 import khannedy.jwidget.listener.PaginationModelListener;
 import khannedy.jwidget.model.PaginationModel;
+import khannedy.jwidget.util.ImageUtilities;
 
 /**
  *
@@ -54,9 +55,9 @@ public final class JPagination extends JPanel implements PaginationModelListener
     private void initComponent() {
         setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        buttonFirst = new JButton("|<");
+        buttonFirst = new JButton();
         buttonFirst.addActionListener(this);
-        buttonPrev = new JButton("<");
+        buttonPrev = new JButton();
         buttonPrev.addActionListener(this);
 
         add(buttonFirst);
@@ -68,12 +69,18 @@ public final class JPagination extends JPanel implements PaginationModelListener
         add(comboPage);
         add(new JSeparator(JSeparator.VERTICAL));
 
-        buttonNext = new JButton(">");
+        buttonNext = new JButton();
         buttonNext.addActionListener(this);
-        buttonLast = new JButton(">|");
+        buttonLast = new JButton();
         buttonLast.addActionListener(this);
         add(buttonNext);
         add(buttonLast);
+
+        // change to default icon
+        setIconFirst(ImageUtilities.getIcon("/khannedy/jwidget/resource/go_first.png"));
+        setIconLast(ImageUtilities.getIcon("/khannedy/jwidget/resource/go_last.png"));
+        setIconNext(ImageUtilities.getIcon("/khannedy/jwidget/resource/go_next.png"));
+        setIconPrev(ImageUtilities.getIcon("/khannedy/jwidget/resource/go_previous.png"));
     }
 
     protected void renderComponent() {
@@ -174,12 +181,18 @@ public final class JPagination extends JPanel implements PaginationModelListener
 
     @Override
     public void setOpaque(boolean isOpaque) {
-        buttonFirst.setOpaque(isOpaque);
-        buttonLast.setOpaque(isOpaque);
-        buttonNext.setOpaque(isOpaque);
-        buttonPrev.setOpaque(isOpaque);
-        comboPage.setOpaque(isOpaque);
         super.setOpaque(isOpaque);
+        if (buttonFirst != null
+                && buttonLast != null
+                && buttonNext != null
+                && buttonPrev != null
+                && comboPage != null) {
+            buttonFirst.setOpaque(isOpaque);
+            buttonLast.setOpaque(isOpaque);
+            buttonNext.setOpaque(isOpaque);
+            buttonPrev.setOpaque(isOpaque);
+            comboPage.setOpaque(isOpaque);
+        }
     }
 
     public void setIconFirst(Icon defaultIcon) {
