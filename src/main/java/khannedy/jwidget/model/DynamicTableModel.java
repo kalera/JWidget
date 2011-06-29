@@ -20,9 +20,12 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import khannedy.jwidget.annotation.TableColumn;
 import khannedy.jwidget.comparator.TableColumnComparator;
+import khannedy.jwidget.util.ArrayUtilities;
 
 /**
  *
@@ -34,23 +37,52 @@ public class DynamicTableModel<T> extends AbstractTableModel {
 
     private List<Field> fields;
 
+    private String group;
+
+    private Class<T> clazz;
+
     public DynamicTableModel(Class<T> clazz) {
         this(new ArrayList<T>(), clazz);
     }
 
     public DynamicTableModel(List<T> data, Class<T> clazz) {
         this.data = data;
+        this.clazz = clazz;
         fields = new ArrayList<Field>();
 
-        Field[] fs = clazz.getDeclaredFields();
+        initTableModel();
+    }
+
+    private void initTableModel() {
+        fields.clear();
+
+        Field[] fs = this.clazz.getDeclaredFields();
         for (Field field : fs) {
-            if (field.getAnnotation(TableColumn.class) != null) {
-                field.setAccessible(true);
-                fields.add(field);
+            TableColumn column = field.getAnnotation(TableColumn.class);
+            if (column != null) {
+                if (group == null) {
+                    field.setAccessible(true);
+                    fields.add(field);
+                } else {
+                    if (ArrayUtilities.contains(column.groups(), group)) {
+                        field.setAccessible(true);
+                        fields.add(field);
+                    }
+                }
             }
         }
 
         Collections.sort(fields, new TableColumnComparator());
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+        initTableModel();
+        fireTableStructureChanged();
     }
 
     public int getRowCount() {
@@ -83,5 +115,19 @@ public class DynamicTableModel<T> extends AbstractTableModel {
 
     public List<T> getData() {
         return data;
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return fields.get(columnIndex).getAnnotation(TableColumn.class).editable();
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        try {
+            fields.get(columnIndex).set(data.get(rowIndex), aValue);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DynamicTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
