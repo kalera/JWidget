@@ -95,10 +95,9 @@ public class DynamicTableModel<T> extends AbstractTableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
-            Field field = fields.get(columnIndex);
-            T entity = data.get(rowIndex);
-            return field.get(entity);
+            return fields.get(columnIndex).get(data.get(rowIndex));
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(DynamicTableModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
