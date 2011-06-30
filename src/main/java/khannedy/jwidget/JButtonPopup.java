@@ -65,8 +65,16 @@ public class JButtonPopup extends JToggleButton implements ActionListener, Popup
         popupMenu.addPopupMenuListener(this);
     }
 
-    public void addMenuItem(JMenuItem menuItem) {
-        popupMenu.add(menuItem);
+    public JMenuItem addMenuItem(Action action) {
+        return popupMenu.add(action);
+    }
+
+    public JMenuItem addMenuItem(String text) {
+        return popupMenu.add(text);
+    }
+
+    public JMenuItem addMenuItem(JMenuItem menuItem) {
+        return popupMenu.add(menuItem);
     }
 
     public void removeMenuItem(JMenuItem menuItem) {
