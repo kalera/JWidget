@@ -27,6 +27,7 @@ import khannedy.jwidget.listener.PaginationModelListener;
  */
 public abstract class AbstractPaginationModel implements PaginationModel {
 
+    @SuppressWarnings("ProtectedField")
     protected EventListenerList listenerList = new EventListenerList();
 
     private int currentPage = 1;

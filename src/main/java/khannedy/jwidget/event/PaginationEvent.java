@@ -25,6 +25,8 @@ import khannedy.jwidget.JPagination;
  */
 public class PaginationEvent extends EventObject {
 
+    private static final long serialVersionUID = 1L;
+
     private PaginationAction actionType;
 
     public PaginationEvent(JPagination source, PaginationAction actionType) {

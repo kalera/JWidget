@@ -25,6 +25,8 @@ import khannedy.jwidget.JTimeLabel;
  */
 public class TimeLabelEvent extends EventObject {
 
+    private static final long serialVersionUID = 1L;
+
     public TimeLabelEvent(JTimeLabel source) {
         super(source);
     }

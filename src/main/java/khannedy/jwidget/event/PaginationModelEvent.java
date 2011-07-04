@@ -25,6 +25,8 @@ import khannedy.jwidget.model.PaginationModel;
  */
 public class PaginationModelEvent extends EventObject {
 
+    private static final long serialVersionUID = 1L;
+
     private PaginationAction actionType;
 
     public PaginationModelEvent(PaginationModel source, PaginationAction actionType) {

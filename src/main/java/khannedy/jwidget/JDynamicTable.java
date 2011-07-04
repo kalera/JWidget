@@ -32,13 +32,15 @@ import khannedy.jwidget.renderer.NoTableCellRenderer;
  */
 public class JDynamicTable extends JTable {
 
+    private static final long serialVersionUID = 1L;
+
     public void setDynamicModel(DynamicTableModel<?> model) {
         setModel(model);
     }
 
     public DynamicTableModel<?> getDynamicModel() {
         if (super.getModel() instanceof DynamicTableModel) {
-            DynamicTableModel dynamicTableModel = (DynamicTableModel) super.getModel();
+            DynamicTableModel<?> dynamicTableModel = (DynamicTableModel) super.getModel();
             return dynamicTableModel;
         } else {
             return null;
@@ -56,7 +58,7 @@ public class JDynamicTable extends JTable {
     public void setModel(TableModel dataModel) {
         if (dataModel instanceof DynamicTableModel) {
             super.setModel(dataModel);
-            DynamicTableModel dynamicTableModel = (DynamicTableModel) dataModel;
+            DynamicTableModel<?> dynamicTableModel = (DynamicTableModel) dataModel;
             fireChangeTableCellRenderer(dynamicTableModel);
             fireChangeTableCellEditor(dynamicTableModel);
         } else {
@@ -64,7 +66,7 @@ public class JDynamicTable extends JTable {
         }
     }
 
-    protected void fireChangeTableCellRenderer(DynamicTableModel dynamicTableModel) {
+    protected void fireChangeTableCellRenderer(DynamicTableModel<?> dynamicTableModel) {
         for (int i = 0; i < dynamicTableModel.getColumnCount(); i++) {
             try {
                 if (!dynamicTableModel.getTableCellRenderer(i).equals(NoTableCellRenderer.class)) {
@@ -79,7 +81,7 @@ public class JDynamicTable extends JTable {
         }
     }
 
-    protected void fireChangeTableCellEditor(DynamicTableModel dynamicTableModel) {
+    protected void fireChangeTableCellEditor(DynamicTableModel<?> dynamicTableModel) {
         for (int i = 0; i < dynamicTableModel.getColumnCount(); i++) {
             try {
                 if (!dynamicTableModel.getTableCellEditor(i).equals(NoTableCellEditor.class)) {

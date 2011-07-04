@@ -26,6 +26,7 @@ import javax.swing.table.TableCellEditor;
  *
  * @author Eko Kurniawan Khannedy
  */
+@SuppressWarnings("FinalClass")
 public final class NoTableCellEditor implements TableCellEditor {
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

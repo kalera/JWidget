@@ -32,6 +32,9 @@ import javax.swing.event.PopupMenuListener;
  */
 public class JButtonPopup extends JToggleButton implements ActionListener, PopupMenuListener {
 
+    private static final long serialVersionUID = 1L;
+
+    @SuppressWarnings("ProtectedField")
     protected JPopupMenu popupMenu = new JPopupMenu();
 
     //<editor-fold defaultstate="collapsed" desc="Override Constructor">

@@ -20,7 +20,12 @@ package khannedy.jwidget.util;
  *
  * @author echo
  */
+@SuppressWarnings("FinalClass")
 public final class ArrayUtilities {
+
+    private ArrayUtilities() {
+        // utilities class
+    }
 
     public static boolean contains(Object[] objects, Object search) {
         for (Object object : objects) {

@@ -22,6 +22,8 @@ package khannedy.jwidget.model;
  */
 public class DefaultPaginationModel extends AbstractPaginationModel {
 
+    private static final long serialVersionUID = 1L;
+
     private int pageSize;
 
     private int totalItem;

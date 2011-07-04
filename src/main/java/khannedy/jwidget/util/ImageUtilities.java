@@ -23,7 +23,12 @@ import javax.swing.ImageIcon;
  *
  * @author echo
  */
+@SuppressWarnings("FinalClass")
 public final class ImageUtilities {
+
+    private ImageUtilities() {
+        // utilities class
+    }
 
     public static Icon getIcon(String url) {
         return new ImageIcon(ImageUtilities.class.getResource(url));

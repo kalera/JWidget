@@ -31,9 +31,12 @@ import khannedy.jwidget.util.ArrayUtilities;
 
 /**
  *
+ * @param <T> 
  * @author Eko Kurniawan Khannedy
  */
 public class DynamicTableModel<T> extends AbstractTableModel {
+
+    private static final long serialVersionUID = 1L;
 
     private List<T> data;
 
@@ -44,13 +47,13 @@ public class DynamicTableModel<T> extends AbstractTableModel {
     private Class<T> clazz;
 
     public DynamicTableModel(Class<T> clazz) {
-        this(new ArrayList<T>(), clazz);
+        this(new ArrayList<T>(0), clazz);
     }
 
     public DynamicTableModel(List<T> data, Class<T> clazz) {
         this.data = data;
         this.clazz = clazz;
-        fields = new ArrayList<Field>();
+        fields = new ArrayList<Field>(0);
 
         initTableModel();
     }
@@ -147,7 +150,7 @@ public class DynamicTableModel<T> extends AbstractTableModel {
     }
 
     public List<T> getData() {
-        return data;
+        return Collections.unmodifiableList(data);
     }
 
     @Override

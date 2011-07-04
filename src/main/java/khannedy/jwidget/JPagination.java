@@ -37,12 +37,15 @@ import khannedy.jwidget.util.ImageUtilities;
  *
  * @author Eko Kurniawan Khannedy
  */
-public final class JPagination extends JPanel implements PaginationModelListener, ActionListener, ItemListener {
+public class JPagination extends JPanel implements PaginationModelListener, ActionListener, ItemListener {
+
+    private static final long serialVersionUID = 1L;
 
     private JButton buttonFirst, buttonPrev, buttonNext, buttonLast;
 
     private JComboBox comboPage;
 
+    @SuppressWarnings("ProtectedField")
     protected PaginationModel model;
 
     public static final String PROP_MODEL = "model";
@@ -83,7 +86,11 @@ public final class JPagination extends JPanel implements PaginationModelListener
         setIconPrev(ImageUtilities.getIcon("/khannedy/jwidget/resource/go_previous.png"));
     }
 
-    protected void renderComponent() {
+    public void doRender() {
+        renderComponent();
+    }
+
+    private void renderComponent() {
         if (model == null) {
             buttonFirst.setEnabled(false);
             buttonLast.setEnabled(false);
@@ -99,7 +106,11 @@ public final class JPagination extends JPanel implements PaginationModelListener
         }
     }
 
-    protected void refreshPagination() {
+    public void doRefresh() {
+        refreshPagination();
+    }
+
+    private void refreshPagination() {
         comboPage.removeAllItems();
         for (int i = 1; i <= model.getTotalPage(); i++) {
             comboPage.addItem(i);

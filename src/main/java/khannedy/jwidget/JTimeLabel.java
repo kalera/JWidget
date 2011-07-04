@@ -32,6 +32,8 @@ import khannedy.jwidget.listener.TimeLabelListener;
  */
 public class JTimeLabel extends JLabel implements ActionListener {
 
+    private static final long serialVersionUID = 1L;
+
     private String timeFormatter = "HH:mm:ss";
 
     public static final String PROP_TIME_FORMATTER = "timeFormatter";
