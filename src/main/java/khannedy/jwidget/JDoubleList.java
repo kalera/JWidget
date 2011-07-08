@@ -31,6 +31,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import khannedy.jwidget.event.DoubleListEvent;
+import khannedy.jwidget.listener.DoubleListListener;
 
 /**
  *
@@ -125,6 +127,41 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //<editor-fold defaultstate="collapsed" desc="Listener">
+    public void addDoubleListListener(DoubleListListener listener) {
+        listenerList.add(DoubleListListener.class, listener);
+    }
+
+    public void removeDoubleListListener(DoubleListListener listener) {
+        listenerList.add(DoubleListListener.class, listener);
+    }
+
+    protected void fireOnAdd(DoubleListEvent event) {
+        for (DoubleListListener listener : listenerList.getListeners(DoubleListListener.class)) {
+            listener.onAdd(event);
+        }
+    }
+
+    protected void fireOnRemove(DoubleListEvent event) {
+        for (DoubleListListener listener : listenerList.getListeners(DoubleListListener.class)) {
+            listener.onRemove(event);
+        }
+    }
+
+    protected void fireOnAddAll(DoubleListEvent event) {
+        for (DoubleListListener listener : listenerList.getListeners(DoubleListListener.class)) {
+            listener.onAddAll(event);
+        }
+    }
+
+    protected void fireOnRemoveAll(DoubleListEvent event) {
+        for (DoubleListListener listener : listenerList.getListeners(DoubleListListener.class)) {
+            listener.onRemoveAll(event);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Initialize">
     private void initModels() {
         listModelFrom = new DefaultListModel();
         listFrom.setModel(listModelFrom);
@@ -132,6 +169,17 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
         listModelTo = new DefaultListModel();
         listTo.setModel(listModelTo);
     }
+
+    private void initListeners() {
+        listTo.getSelectionModel().addListSelectionListener(this);
+        listFrom.getSelectionModel().addListSelectionListener(this);
+
+        buttonAdd.addActionListener(this);
+        buttonAddAll.addActionListener(this);
+        buttonRemove.addActionListener(this);
+        buttonRemoveAll.addActionListener(this);
+    }
+    //</editor-fold>
 
     public List<?> getResultValues() {
         List<Object> list = new ArrayList<Object>(0);
@@ -154,16 +202,7 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
         fireButtonEnabled();
     }
 
-    private void initListeners() {
-        listTo.getSelectionModel().addListSelectionListener(this);
-        listFrom.getSelectionModel().addListSelectionListener(this);
-
-        buttonAdd.addActionListener(this);
-        buttonAddAll.addActionListener(this);
-        buttonRemove.addActionListener(this);
-        buttonRemoveAll.addActionListener(this);
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Getter dan Setter">
     public void setButtonAddText(String text) {
         buttonAdd.setText(text);
     }
@@ -218,6 +257,7 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
         buttonRemove.setEnabled(remove);
         buttonRemoveAll.setEnabled(removeAll);
     }
+    //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
@@ -241,27 +281,43 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAdd) {
-            for (Object object : listFrom.getSelectedValues()) {
+            Object[] objects = listFrom.getSelectedValues();
+            for (Object object : objects) {
                 listModelTo.addElement(object);
             }
             while (listFrom.getSelectedIndex() != -1) {
                 listModelFrom.remove(listFrom.getSelectedIndex());
             }
+            fireOnAdd(new DoubleListEvent(this, objects));
         } else if (e.getSource() == buttonRemove) {
-            for (Object object : listTo.getSelectedValues()) {
+            Object[] objects = listTo.getSelectedValues();
+            for (Object object : objects) {
                 listModelFrom.addElement(object);
             }
             while (listTo.getSelectedIndex() != -1) {
                 listModelTo.remove(listTo.getSelectedIndex());
             }
+            fireOnRemove(new DoubleListEvent(this, objects));
         } else if (e.getSource() == buttonAddAll) {
+            List<Object> objects = new ArrayList<Object>(0);
             while (!listModelFrom.isEmpty()) {
-                listModelTo.addElement(listModelFrom.remove(0));
+                Object object = listModelFrom.remove(0);
+                objects.add(object);
             }
+            for (Object object : objects) {
+                listModelTo.addElement(object);
+            }
+            fireOnAddAll(new DoubleListEvent(this, objects.toArray()));
         } else if (e.getSource() == buttonRemoveAll) {
+            List<Object> objects = new ArrayList<Object>(0);
             while (!listModelTo.isEmpty()) {
-                listModelFrom.addElement(listModelTo.remove(0));
+                Object object = listModelTo.remove(0);
+                objects.add(object);
             }
+            for (Object object : objects) {
+                listModelFrom.addElement(object);
+            }
+            fireOnRemoveAll(new DoubleListEvent(this, objects.toArray()));
         }
         fireButtonEnabled();
     }
