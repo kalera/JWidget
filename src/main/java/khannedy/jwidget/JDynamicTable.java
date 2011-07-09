@@ -34,6 +34,15 @@ public class JDynamicTable extends JTable {
 
     private static final long serialVersionUID = 1L;
 
+    public JDynamicTable() {
+        initComponent();
+    }
+
+    private void initComponent() {
+        setAutoResizeMode(JDynamicTable.AUTO_RESIZE_OFF);
+        setAutoCreateRowSorter(true);
+    }
+
     public void setDynamicModel(DynamicTableModel<?> model) {
         setModel(model);
     }
@@ -61,8 +70,16 @@ public class JDynamicTable extends JTable {
             DynamicTableModel<?> dynamicTableModel = (DynamicTableModel) dataModel;
             fireChangeTableCellRenderer(dynamicTableModel);
             fireChangeTableCellEditor(dynamicTableModel);
+            fireChangeTableHeaderSize(dynamicTableModel);
         } else {
             super.setModel(dataModel);
+        }
+    }
+
+    protected void fireChangeTableHeaderSize(DynamicTableModel<?> dynamicTableModel) {
+        for (int i = 0; i < dynamicTableModel.getColumnCount(); i++) {
+            int size = dynamicTableModel.getSize(i) * getFontMetrics(getFont()).charWidth('A');
+            getColumnModel().getColumn(i).setMinWidth(size);
         }
     }
 

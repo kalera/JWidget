@@ -37,6 +37,8 @@ public @interface TableColumn {
 
     int number();
 
+    int size() default 15;
+
     String name();
 
     boolean editable() default false;

@@ -174,4 +174,8 @@ public class DynamicTableModel<T> extends AbstractTableModel {
     public Class<? extends TableCellRenderer> getTableCellRenderer(int column) {
         return fields.get(column).getAnnotation(TableColumn.class).renderer();
     }
+
+    public int getSize(int column) {
+        return fields.get(column).getAnnotation(TableColumn.class).size();
+    }
 }
