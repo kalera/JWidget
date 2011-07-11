@@ -30,6 +30,7 @@ import khannedy.jwidget.event.PaginationEvent;
 import khannedy.jwidget.event.PaginationModelEvent;
 import khannedy.jwidget.listener.PaginationListener;
 import khannedy.jwidget.listener.PaginationModelListener;
+import khannedy.jwidget.model.DefaultPaginationModel;
 import khannedy.jwidget.model.PaginationModel;
 import khannedy.jwidget.util.ImageUtilities;
 
@@ -51,6 +52,15 @@ public class JPagination extends JPanel implements PaginationModelListener, Acti
     public static final String PROP_MODEL = "model";
 
     public JPagination() {
+        this(100, 1000);
+    }
+
+    public JPagination(int pageSize, int totalRecord) {
+        this(new DefaultPaginationModel(pageSize, totalRecord));
+    }
+
+    public JPagination(PaginationModel model) {
+        this.model = model;
         initComponent();
         renderComponent();
     }
