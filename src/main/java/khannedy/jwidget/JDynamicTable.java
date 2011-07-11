@@ -16,12 +16,14 @@
  */
 package khannedy.jwidget;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import khannedy.jwidget.annotation.TableColumn;
 import khannedy.jwidget.editor.NoTableCellEditor;
 import khannedy.jwidget.model.DynamicTableModel;
 import khannedy.jwidget.renderer.NoTableCellRenderer;
@@ -35,6 +37,12 @@ public class JDynamicTable extends JTable {
     private static final long serialVersionUID = 1L;
 
     public JDynamicTable() {
+        this(new DynamicTableModel<DummyEntity>(DummyEntity.class));
+    }
+
+    @SuppressWarnings("OverridableMethodCallInConstructor")
+    public JDynamicTable(DynamicTableModel<?> tableModel) {
+        setDynamicModel(tableModel);
         initComponent();
     }
 
@@ -112,4 +120,44 @@ public class JDynamicTable extends JTable {
             }
         }
     }
+
+    //<editor-fold defaultstate="collapsed" desc="Dummy Entity">
+    private class DummyEntity implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
+        @TableColumn(name = "A", number = 1)
+        private String a;
+
+        @TableColumn(name = "B", number = 2)
+        private String b;
+
+        @TableColumn(name = "C", number = 3)
+        private String c;
+
+        public String getA() {
+            return a;
+        }
+
+        public void setA(String a) {
+            this.a = a;
+        }
+
+        public String getB() {
+            return b;
+        }
+
+        public void setB(String b) {
+            this.b = b;
+        }
+
+        public String getC() {
+            return c;
+        }
+
+        public void setC(String c) {
+            this.c = c;
+        }
+    }
+    //</editor-fold>
 }
