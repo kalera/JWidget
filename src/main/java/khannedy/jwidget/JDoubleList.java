@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
@@ -46,11 +47,18 @@ public class JDoubleList extends javax.swing.JPanel implements ListSelectionList
 
     private DefaultListModel listModelTo;
 
-    /** Creates new form JDoubleList */
-    public JDoubleList() {
+    @SuppressWarnings("OverridableMethodCallInConstructor")
+    public JDoubleList(Collection<?> sourceValues) {
         initComponents();
         initModels();
         initListeners();
+
+        setSourceValues(sourceValues);
+    }
+
+    /** Creates new form JDoubleList */
+    public JDoubleList() {
+        this(Collections.EMPTY_LIST);
     }
 
     /** This method is called from within the constructor to
