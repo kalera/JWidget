@@ -124,16 +124,22 @@ public class JDynamicTable extends JTable {
     //<editor-fold defaultstate="collapsed" desc="Dummy Entity">
     private class DummyEntity implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 2L;
 
-        @TableColumn(name = "A", number = 1)
+        @TableColumn(name = "D", number = 1)
         private String a;
 
-        @TableColumn(name = "B", number = 2)
+        @TableColumn(name = "U", number = 2)
         private String b;
 
-        @TableColumn(name = "C", number = 3)
+        @TableColumn(name = "M", number = 3)
         private String c;
+
+        @TableColumn(name = "M", number = 4)
+        private String d;
+
+        @TableColumn(name = "Y", number = 5)
+        private String e;
 
         public String getA() {
             return a;
@@ -157,6 +163,22 @@ public class JDynamicTable extends JTable {
 
         public void setC(String c) {
             this.c = c;
+        }
+
+        public String getD() {
+            return d;
+        }
+
+        public void setD(String d) {
+            this.d = d;
+        }
+
+        public String getE() {
+            return e;
+        }
+
+        public void setE(String e) {
+            this.e = e;
         }
     }
     //</editor-fold>
