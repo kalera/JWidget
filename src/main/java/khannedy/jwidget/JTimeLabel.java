@@ -34,7 +34,9 @@ public class JTimeLabel extends JLabel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private String timeFormatter = "HH:mm:ss";
+    private String timeFormatter;
+
+    public static final String DEFAULT_TIME_FORMATTER = "HH:mm:ss";
 
     public static final String PROP_TIME_FORMATTER = "timeFormatter";
 
@@ -42,16 +44,23 @@ public class JTimeLabel extends JLabel implements ActionListener {
 
     public static final String PROP_DELAY = "delay";
 
-    private Date now = new Date();
+    private Date now;
 
     private DateFormat format;
 
     public JTimeLabel() {
-        initComponent();
+        this(1000, JTimeLabel.DEFAULT_TIME_FORMATTER);
     }
 
-    private void initComponent() {
-        timer = new Timer(1000, this);
+    public JTimeLabel(int delay) {
+        this(delay, JTimeLabel.DEFAULT_TIME_FORMATTER);
+    }
+
+    public JTimeLabel(int delay, String timeFormatter) {
+        this.timeFormatter = timeFormatter;
+
+        now = new Date();
+        timer = new Timer(delay, this);
         format = new SimpleDateFormat(timeFormatter);
 
         renderTime();
