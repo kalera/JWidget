@@ -26,6 +26,19 @@ import java.util.Collection;
 public final class CollectionUtilities {
 
     /**
+     * Move objects from collection to other collection
+     * @param <T>
+     * @param from source collection
+     * @param to target collection
+     * @param switchObjects
+     */
+    public static <T> void moveObject(Collection<T> from, Collection<T> to, T[] switchObjects) {
+        for (T object : switchObjects) {
+            CollectionUtilities.moveObject(from, to, object);
+        }
+    }
+
+    /**
      * Move object from collection to other collection
      * @param <T>
      * @param from source collection
