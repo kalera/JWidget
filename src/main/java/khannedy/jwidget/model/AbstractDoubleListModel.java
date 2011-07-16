@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.event.EventListenerList;
 import khannedy.jwidget.event.DoubleListModelEvent;
 import khannedy.jwidget.listener.DoubleListModelListener;
+import khannedy.jwidget.util.ArrayUtilities;
 
 /**
  *
@@ -55,15 +56,6 @@ public abstract class AbstractDoubleListModel<T> implements DoubleListModel<T> {
 
     public abstract void removeAllTargetValues();
 
-    private T[] convertToArray(List<T> list) {
-        @SuppressWarnings("unchecked")
-        T[] array = (T[]) Array.newInstance(dataClass, list.size());
-        for (int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
-        }
-        return array;
-    }
-
     public T[] actionAdd(int[] index) {
         List<T> list = new ArrayList<T>(index.length);
 
@@ -77,7 +69,7 @@ public abstract class AbstractDoubleListModel<T> implements DoubleListModel<T> {
         addTargetValues(list);
         fireTargetValuesAdd(list.toArray());
 
-        return convertToArray(list);
+        return ArrayUtilities.<T>convert(list, getDataClass());
     }
 
     public T[] actionRemove(int[] index) {
@@ -93,7 +85,7 @@ public abstract class AbstractDoubleListModel<T> implements DoubleListModel<T> {
         addSourceValues(list);
         fireSourceValuesAdd(list.toArray());
 
-        return convertToArray(list);
+        return ArrayUtilities.<T>convert(list, getDataClass());
     }
 
     public T[] actionAddAll() {
@@ -108,7 +100,7 @@ public abstract class AbstractDoubleListModel<T> implements DoubleListModel<T> {
         removeAllSourceValues();
         fireSourceValuesRemove(list.toArray());
 
-        return convertToArray(list);
+        return ArrayUtilities.<T>convert(list, getDataClass());
     }
 
     public T[] actionRemoveAll() {
@@ -123,7 +115,7 @@ public abstract class AbstractDoubleListModel<T> implements DoubleListModel<T> {
         removeAllTargetValues();
         fireTargetValuesRemove(list.toArray());
 
-        return convertToArray(list);
+        return ArrayUtilities.<T>convert(list, getDataClass());
     }
 
     //<editor-fold defaultstate="collapsed" desc="Listeners">

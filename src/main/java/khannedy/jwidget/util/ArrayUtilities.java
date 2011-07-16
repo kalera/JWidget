@@ -16,6 +16,9 @@
  */
 package khannedy.jwidget.util;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 /**
  *
  * @author echo
@@ -34,5 +37,12 @@ public final class ArrayUtilities {
             }
         }
         return false;
+    }
+
+    public static <T> T[] convert(List<T> list, Class<T> clazz) {
+        @SuppressWarnings("unchecked")
+        T[] array = (T[]) Array.newInstance(clazz, list.size());
+        array = list.toArray(array);
+        return array;
     }
 }
