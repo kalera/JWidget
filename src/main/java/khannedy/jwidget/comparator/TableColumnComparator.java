@@ -26,6 +26,7 @@ import khannedy.jwidget.annotation.TableColumn;
  */
 public class TableColumnComparator implements Comparator<Field> {
 
+    @Override
     public int compare(Field o1, Field o2) {
         TableColumn column1 = o1.getAnnotation(TableColumn.class);
         TableColumn column2 = o2.getAnnotation(TableColumn.class);

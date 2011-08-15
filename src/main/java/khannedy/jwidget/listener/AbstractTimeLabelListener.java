@@ -25,16 +25,19 @@ import khannedy.jwidget.event.TimeLabelEvent;
 public abstract class AbstractTimeLabelListener implements TimeLabelListener {
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onStart(TimeLabelEvent event) {
         // abstract class
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onStop(TimeLabelEvent event) {
         // abstract class
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onTimeChange(TimeLabelEvent event) {
         // abstract class
     }

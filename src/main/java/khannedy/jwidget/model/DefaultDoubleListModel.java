@@ -19,6 +19,7 @@ package khannedy.jwidget.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -117,19 +118,38 @@ public class DefaultDoubleListModel<T> extends AbstractDoubleListModel<T> {
         target.clear();
     }
 
+    @Override
     public int getSourceSize() {
         return source.size();
     }
 
+    @Override
     public T getSourceValue(int index) {
         return source.get(index);
     }
 
+    @Override
     public int getTargetSize() {
         return target.size();
     }
 
+    @Override
     public T getTargetValue(int index) {
         return target.get(index);
+    }
+
+    @Override
+    public Collection<T> getSources() {
+        return Collections.unmodifiableCollection(source);
+    }
+
+    @Override
+    public Collection<T> getValues() {
+        return Collections.unmodifiableCollection(target);
+    }
+
+    @Override
+    public int indexOf(T value) {
+        return source.indexOf(value);
     }
 }

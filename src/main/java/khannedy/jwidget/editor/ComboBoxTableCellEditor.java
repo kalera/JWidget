@@ -14,21 +14,22 @@
  *  limitations under the License.
  *  under the License.
  */
-package khannedy.jwidget.renderer;
+package khannedy.jwidget.editor;
 
-import java.awt.Component;
-import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 
 /**
  *
- * @author echo
+ * @param <E> 
+ * @author Eko Kurniawan Khannedy
  */
-@SuppressWarnings("FinalClass")
-public final class NoTableCellRenderer implements TableCellRenderer {
+public class ComboBoxTableCellEditor<E> extends DefaultCellEditor {
 
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private static final long serialVersionUID = 1L;
+
+    public ComboBoxTableCellEditor(E[] values) {
+        super(new JComboBox<E>(values));
+        setClickCountToStart(2);
     }
 }

@@ -121,10 +121,13 @@ public class JPagination extends JPanel implements PaginationModelListener, Acti
     }
 
     private void refreshPagination() {
+        comboPage.removeItemListener(this);
         comboPage.removeAllItems();
         for (int i = 1; i <= model.getTotalPage(); i++) {
-            comboPage.addItem(i);
+            comboPage.addItem(new Integer(i));
         }
+        comboPage.setSelectedItem(new Integer(model.getCurrentPage()));
+        comboPage.addItemListener(this);
     }
 
     /**
@@ -194,8 +197,10 @@ public class JPagination extends JPanel implements PaginationModelListener, Acti
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == comboPage) {
-            if (Integer.valueOf(comboPage.getSelectedItem().toString()) != model.getCurrentPage()) {
-                model.goToPage(Integer.valueOf(comboPage.getSelectedItem().toString()));
+            if (comboPage.getSelectedItem() != null) {
+                if (Integer.valueOf(comboPage.getSelectedItem().toString()) != model.getCurrentPage()) {
+                    model.goToPage(Integer.valueOf(comboPage.getSelectedItem().toString()));
+                }
             }
         }
     }

@@ -88,6 +88,14 @@ public class DynamicTableModel<T> extends AbstractTableModel {
         }
     }
 
+    public void clear() {
+        try {
+            data.clear();
+        } finally {
+            fireTableDataChanged();
+        }
+    }
+
     public T remove(int index) {
         try {
             return data.remove(index);
@@ -122,14 +130,17 @@ public class DynamicTableModel<T> extends AbstractTableModel {
         fireTableStructureChanged();
     }
 
+    @Override
     public int getRowCount() {
         return data.size();
     }
 
+    @Override
     public int getColumnCount() {
         return fields.size();
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             return fields.get(columnIndex).get(data.get(rowIndex));

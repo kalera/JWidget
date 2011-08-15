@@ -84,24 +84,32 @@ public class JButtonPopup extends JToggleButton implements ActionListener, Popup
         popupMenu.remove(menuItem);
     }
 
+    public void removeMenuItem(int position) {
+        popupMenu.remove(position);
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
             popupMenu.show(this, 0, getHeight());
         }
     }
 
+    @Override
     public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
         if (e.getSource() == popupMenu) {
             setSelected(true);
         }
     }
 
+    @Override
     public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
         if (e.getSource() == popupMenu) {
             setSelected(false);
         }
     }
 
+    @Override
     public void popupMenuCanceled(PopupMenuEvent e) {
         if (e.getSource() == popupMenu) {
             setSelected(false);

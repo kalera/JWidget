@@ -29,34 +29,42 @@ import javax.swing.table.TableCellEditor;
 @SuppressWarnings("FinalClass")
 public final class NoTableCellEditor implements TableCellEditor {
 
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public Object getCellEditorValue() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public boolean isCellEditable(EventObject anEvent) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public boolean shouldSelectCell(EventObject anEvent) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public boolean stopCellEditing() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void cancelCellEditing() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void addCellEditorListener(CellEditorListener l) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void removeCellEditorListener(CellEditorListener l) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

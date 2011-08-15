@@ -17,6 +17,7 @@
 package khannedy.jwidget.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import khannedy.jwidget.listener.DoubleListModelListener;
 
 /**
@@ -32,6 +33,8 @@ public interface DoubleListModel<T> extends Serializable {
 
     int getSourceSize();
 
+    int indexOf(T value);
+
     T getSourceValue(int index);
 
     int getTargetSize();
@@ -45,4 +48,8 @@ public interface DoubleListModel<T> extends Serializable {
     T[] actionAddAll();
 
     T[] actionRemoveAll();
+
+    Collection<T> getSources();
+
+    Collection<T> getValues();
 }

@@ -25,21 +25,25 @@ import khannedy.jwidget.event.DoubleListEvent;
 public abstract class AbstractDoubleListListener implements DoubleListListener {
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onAdd(DoubleListEvent event) {
         // abstract class
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onRemove(DoubleListEvent event) {
         // abstract class
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onAddAll(DoubleListEvent event) {
         // abstract class
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")
+    @Override
     public void onRemoveAll(DoubleListEvent event) {
         // abstract class
     }

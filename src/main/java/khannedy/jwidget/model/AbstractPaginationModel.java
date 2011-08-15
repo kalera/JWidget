@@ -41,11 +41,11 @@ public abstract class AbstractPaginationModel implements PaginationModel {
     }
 
     public boolean isFirstPage() {
-        return getCurrentPage() == 1;
+        return getCurrentPage() <= 1;
     }
 
     public boolean isLastPage() {
-        return getCurrentPage() == getTotalPage();
+        return getCurrentPage() >= getTotalPage();
     }
 
     public boolean isHasNextPage() {
