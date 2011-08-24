@@ -1,3 +1,6 @@
+JWidget
+==============================
+
 JWidget is a Java Swing Widget
 
 List of widgets :
