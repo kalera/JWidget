@@ -13,6 +13,8 @@
  */
 package com.stripbandunk.test.jwidget;
 
+import javax.swing.JMenuItem;
+
 /**
  *
  * @author echo
@@ -23,13 +25,13 @@ public class JButtonPopupTest extends javax.swing.JFrame {
     public JButtonPopupTest() {
         initComponents();
 
-        jButtonPopup1.addMenuItem("Menu Item Satu");
-        jButtonPopup1.addMenuItem("Menu Item Dua");
-        jButtonPopup1.addMenuItem("Menu Item Tiga");
-        jButtonPopup1.addMenuItem("Menu Item Empat");
-        jButtonPopup1.addMenuItem("Menu Item Lima");
-        jButtonPopup1.addMenuItem("Menu Item Enam");
-        jButtonPopup1.addMenuItem("Menu Item Tujuh");
+        JMenuItem menuItem = jButtonPopup1.addMenuItem("Menu Item Satu");
+        JMenuItem menuItem1 = jButtonPopup1.addMenuItem("Menu Item Dua");
+        JMenuItem menuItem2 = jButtonPopup1.addMenuItem("Menu Item Tiga");
+        JMenuItem menuItem3 = jButtonPopup1.addMenuItem("Menu Item Empat");
+        JMenuItem menuItem4 = jButtonPopup1.addMenuItem("Menu Item Lima");
+        JMenuItem menuItem5 = jButtonPopup1.addMenuItem("Menu Item Enam");
+        JMenuItem menuItem6 = jButtonPopup1.addMenuItem("Menu Item Tujuh");
 
     }
 
